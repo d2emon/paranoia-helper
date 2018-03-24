@@ -1,14 +1,14 @@
 const state = {
   securityClearances: [
-    { title: 'Infrared', level: 0, color: '#000000', code: '' },
-    { title: 'Red', level: 10, color: '#ff0000', code: 'R' },
-    { title: 'Orange', level: 20, color: '#ff8800', code: 'O' },
-    { title: 'Yellow', level: 30, color: '#ffff00', code: 'Y' },
-    { title: 'Green', level: 40, color: '#00ff00', code: 'G' },
-    { title: 'Blue', level: 50, color: '#00ffff', code: 'B' },
-    { title: 'Indigo', level: 60, color: '#0000ff', code: 'I' },
-    { title: 'Violet', level: 70, color: '#ff00ff', code: 'V' },
-    { title: 'Ultraviolet', level: 100, color: '#ffffff', code: 'U' }
+    { title: 'Infrared', level: 0, color: 'black', code: '' },
+    { title: 'Red', level: 10, color: 'red', code: 'R' },
+    { title: 'Orange', level: 20, color: 'orange', code: 'O' },
+    { title: 'Yellow', level: 30, color: 'yellow', code: 'Y' },
+    { title: 'Green', level: 40, color: 'green', code: 'G' },
+    { title: 'Blue', level: 50, color: 'blue', code: 'B' },
+    { title: 'Indigo', level: 60, color: 'indigo', code: 'I' },
+    { title: 'Violet', level: 70, color: 'purple', code: 'V' },
+    { title: 'Ultraviolet', level: 100, color: 'white', code: 'U' }
   ],
   jobs: [
     {
@@ -130,15 +130,21 @@ const state = {
 
 const getters = {
   addClone: state => data => {
+    let name = data.name || Math.random().toString(36).replace(/[^a-z]+/g, '')
+    let clearance = data.clearance || state.securityClearances[1]
+    let sector = data.sector || Math.random().toString(36).replace(/[^a-z]+/g, '').toUpperCase().substr(0, 3)
+    let cloneNo = data.cloneNo || 1
     return {
-      name: data.name,
-      clearance: data.clearance,
-      sector: data.sector,
-      cloneNo: data.cloneNo,
+      name: name,
+      clearance: clearance,
+      sector: sector,
+      cloneNo: cloneNo,
       fullName: function () {
-        let res = this.name
-        if (this.clearance.code) res += '-' + this.clearance.code
-        return res + '-' + this.sector + '-' + this.cloneNo
+        let res = ''
+        if (this.name) res = this.name + '-'
+        if (this.clearance.code) res += this.clearance.code + '-'
+        if (this.sector) res += this.sector + '-'
+        return res + this.cloneNo
       },
       nextClone: function () {
         this.cloneNo++
