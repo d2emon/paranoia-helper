@@ -10,18 +10,27 @@
       app
     >
       <v-list>
-        <v-list-tile
-          value="true"
+        <template
           v-for="(item, i) in items"
-          :key="i"
         >
-          <v-list-tile-action>
-            <v-icon v-html="item.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+          <v-divider
+            v-if="item.spacer"
+            :key="'menuitem' + i"
+          ></v-divider>
+          <v-list-tile
+            v-else
+            value="true"
+            :key="'menuitem' + i"
+            :to="item.to"
+          >
+            <v-list-tile-action>
+              <v-icon v-html="item.icon"></v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="item.title"></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </template>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar
@@ -76,14 +85,11 @@ export default {
       clipped: false,
       drawer: true,
       fixed: false,
-      items: [{
-        icon: 'bubble_chart',
-        title: 'Inspire'
-      }],
-      miniVariant: false,
+      items: this.$store.state.main.menu,
+      miniVariant: this.$store.state.main.minified,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'Paranoia'
     }
   },
   name: 'App'
