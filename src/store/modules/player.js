@@ -1,3 +1,36 @@
+var player = {
+  name: '',
+  clearance: null,
+  sector: '',
+  cloneNo: 1,
+
+  strength: 1,
+  agility: 1,
+  dexterity: 1,
+  endurance: 1,
+  moxie: 1,
+  chutzpah: 1,
+
+  rollStats: function () {
+    this.strength = Math.floor(Math.random() * 10) + 1
+    this.agility = Math.floor(Math.random() * 10) + 1
+    this.dexterity = Math.floor(Math.random() * 10) + 1
+    this.endurance = Math.floor(Math.random() * 10) + 1
+    this.moxie = Math.floor(Math.random() * 10) + 1
+    this.chutzpah = Math.floor(Math.random() * 10) + 1
+  },
+  fullName: function () {
+    let res = ''
+    if (this.name) res = this.name + '-'
+    if (this.clearance.code) res += this.clearance.code + '-'
+    if (this.sector) res += this.sector + '-'
+    return res + this.cloneNo
+  },
+  nextClone: function () {
+    this.cloneNo++
+  }
+}
+
 const state = {
   securityClearances: [
     { title: 'Infrared', level: 0, color: 'black', code: '' },
@@ -134,22 +167,15 @@ const getters = {
     let clearance = data.clearance || state.securityClearances[1]
     let sector = data.sector || Math.random().toString(36).replace(/[^a-z]+/g, '').toUpperCase().substr(0, 3)
     let cloneNo = data.cloneNo || 1
-    return {
+    let p = {
+      __proto__: player,
       name: name,
       clearance: clearance,
       sector: sector,
-      cloneNo: cloneNo,
-      fullName: function () {
-        let res = ''
-        if (this.name) res = this.name + '-'
-        if (this.clearance.code) res += this.clearance.code + '-'
-        if (this.sector) res += this.sector + '-'
-        return res + this.cloneNo
-      },
-      nextClone: function () {
-        this.cloneNo++
-      }
+      cloneNo: cloneNo
     }
+    p.rollStats()
+    return p
   },
   messages: (state) => {
     if (!state.player) return false

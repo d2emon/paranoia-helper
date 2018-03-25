@@ -108,6 +108,64 @@
           <v-stepper-content step="3">
             <v-card class="mb-5">
               <v-card-text>
+                <v-container fluid>
+                  <v-layout row>
+                    <v-flex xs12>
+                      <v-text-field
+                        label="Сила"
+                        type="number"
+                        v-model="player.strength"
+                        min="1"
+                        max="10"
+                      />
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-text-field
+                        label="Проворство"
+                        type="number"
+                        v-model="player.agility"
+                        min="1"
+                        max="10"
+                      />
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-text-field
+                        label="Ловкость"
+                        type="number"
+                        v-model="player.dexterity"
+                        min="1"
+                        max="10"
+                      />
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-text-field
+                        label="Выносливость"
+                        type="number"
+                        v-model="player.endurance"
+                        min="1"
+                        max="10"
+                      />
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-text-field
+                        label="Бодрость"
+                        type="number"
+                        v-model="player.moxie"
+                        min="1"
+                        max="10"
+                      />
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-text-field
+                        label="Хуцпа"
+                        type="number"
+                        v-model="player.chutzpah"
+                        min="1"
+                        max="10"
+                      />
+                    </v-flex>
+                  </v-layout>
+                </v-container>
                 <div>
                   Перейдите в раздел, обозначенный «Атрибуты», и переверните десятигранную матрицу для каждого атрибута и
                   запишите результат - или, если ваш гейммастер говорит, что все в порядке, возьмите 60 очков и раздайте
