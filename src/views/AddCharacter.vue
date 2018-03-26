@@ -3,43 +3,24 @@
     <v-layout column align-center>
       <v-stepper v-model="step">
         <v-stepper-header>
-          <v-stepper-step step="1" :complete="step > 1">Подготовка</v-stepper-step>
+          <v-stepper-step step="1" :complete="step > 1">Имя</v-stepper-step>
           <v-divider></v-divider>
-          <v-stepper-step step="2" :complete="step > 2">Имя</v-stepper-step>
+          <v-stepper-step step="2" :complete="step > 2">Аттрибуты</v-stepper-step>
           <v-divider></v-divider>
-          <v-stepper-step step="3" :complete="step > 3">Аттрибуты</v-stepper-step>
+          <v-stepper-step step="3" :complete="step > 3">Базовые Навыки</v-stepper-step>
           <v-divider></v-divider>
-          <v-stepper-step step="4" :complete="step > 4">Сила</v-stepper-step>
+          <v-stepper-step step="4" :complete="step > 4">Служба</v-stepper-step>
           <v-divider></v-divider>
-          <v-stepper-step step="5" :complete="step > 5">Выносливость</v-stepper-step>
+          <v-stepper-step step="5" :complete="step > 5">Навыки</v-stepper-step>
           <v-divider></v-divider>
-          <v-stepper-step step="6" :complete="step > 6">Базовые Навыки</v-stepper-step>
+          <v-stepper-step step="6" :complete="step > 6">Мутации</v-stepper-step>
           <v-divider></v-divider>
-          <v-stepper-step step="7" :complete="step > 7">Служба</v-stepper-step>
+          <v-stepper-step step="7" :complete="step > 7">Тайные Общества</v-stepper-step>
           <v-divider></v-divider>
-          <v-stepper-step step="8" :complete="step > 8">Навыки</v-stepper-step>
-          <v-divider></v-divider>
-          <v-stepper-step step="9" :complete="step > 9">Мутации</v-stepper-step>
-          <v-divider></v-divider>
-          <v-stepper-step step="10" :complete="step > 10">Тайные Общества</v-stepper-step>
-          <v-divider></v-divider>
-          <v-stepper-step step="11">Оборудование, Вещи и Ерунда</v-stepper-step>
+          <v-stepper-step step="8">Оборудование, Вещи и Ерунда</v-stepper-step>
         </v-stepper-header>
         <v-stepper-items class="character-creation">
           <v-stepper-content step="1">
-            <v-card class="mb-5">
-              <v-card-text>
-                <div>
-                  Возьмите карандаш, десятигранный кубик и лист персонажей (или лист бумаги, на который вы запишете персонажа).
-                </div>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer />
-                <v-btn color="primary" @click.native="nextStep">Вперед</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-stepper-content>
-          <v-stepper-content step="2">
             <v-card class="mb-5">
               <v-card-text>
                 <h4>Создайте имя для своего персонажа:</h4>
@@ -99,18 +80,17 @@
                 <h1>{{ player.fullName() }}</h1>
               </v-card-text>
               <v-card-actions>
-                <v-btn color="primary" @click.native="prevStep">Назад</v-btn>
                 <v-spacer />
                 <v-btn color="primary" @click.native="nextStep">Вперед</v-btn>
               </v-card-actions>
             </v-card>
           </v-stepper-content>
-          <v-stepper-content step="3">
+          <v-stepper-content step="2">
             <v-card class="mb-5">
               <v-card-text>
                 <v-container fluid>
                   <v-layout row>
-                    <v-flex xs12>
+                    <v-flex xs6>
                       <v-text-field
                         label="Сила"
                         type="number"
@@ -119,7 +99,27 @@
                         max="10"
                       />
                     </v-flex>
-                    <v-flex xs12>
+                    <v-flex xs6>
+                      <v-layout row>
+                        <v-flex xs6>
+                          Способность Нести
+                        </v-flex>
+                        <v-flex xs6>
+                          {{ player.carryingCapacity() }} кг
+                        </v-flex>
+                      </v-layout row>
+                      <v-layout row>
+                        <v-flex xs6>
+                          Рукопашный Удар
+                        </v-flex>
+                        <v-flex xs6>
+                          {{ player.HTH() }}
+                        </v-flex>
+                      </v-layout row>
+                    </v-flex>
+                  </v-layout>
+                  <v-layout row>
+                    <v-flex xs6>
                       <v-text-field
                         label="Проворство"
                         type="number"
@@ -128,7 +128,7 @@
                         max="10"
                       />
                     </v-flex>
-                    <v-flex xs12>
+                    <v-flex xs6>
                       <v-text-field
                         label="Ловкость"
                         type="number"
@@ -137,7 +137,9 @@
                         max="10"
                       />
                     </v-flex>
-                    <v-flex xs12>
+                  </v-layout>
+                  <v-layout row>
+                    <v-flex xs6>
                       <v-text-field
                         label="Выносливость"
                         type="number"
@@ -146,7 +148,27 @@
                         max="10"
                       />
                     </v-flex>
-                    <v-flex xs12>
+                    <v-flex xs6>
+                      <v-layout row>
+                        <v-flex xs6>
+                          Мачо
+                        </v-flex>
+                        <v-flex xs6>
+                          {{ player.macho() }}
+                        </v-flex>
+                      </v-layout row>
+                      <v-layout row>
+                        <v-flex xs6>
+                          Уровень Ранений
+                        </v-flex>
+                        <v-flex xs6>
+                          {{ player.woundLevels() }}
+                        </v-flex>
+                      </v-layout row>
+                    </v-flex>
+                  </v-layout>
+                  <v-layout row>
+                    <v-flex xs6>
                       <v-text-field
                         label="Бодрость"
                         type="number"
@@ -155,7 +177,7 @@
                         max="10"
                       />
                     </v-flex>
-                    <v-flex xs12>
+                    <v-flex xs6>
                       <v-text-field
                         label="Хуцпа"
                         type="number"
@@ -165,6 +187,30 @@
                       />
                     </v-flex>
                   </v-layout>
+                  <v-layout row>
+                    <v-flex xs6>
+                      <v-text-field
+                        label="Механические Способности"
+                        type="number"
+                        v-model="player.chutzpah"
+                        min="1"
+                        max="10"
+                      />
+                    </v-flex>
+                    <v-flex xs6>
+                      <v-text-field
+                        label="Мощность"
+                        type="number"
+                        v-model="player.chutzpah"
+                        min="1"
+                        max="10"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <v-layout row>
+                  </v-layout>
+                  <v-layout row>
+                  </v-layout>
                 </v-container>
                 <div>
                   Перейдите в раздел, обозначенный «Атрибуты», и переверните десятигранную матрицу для каждого атрибута и
@@ -172,6 +218,14 @@
                   их среди восьми атрибутов, причем значение 10 является максимально возможным и одно
                   будучи самым низким. Если вы бросаете кости, вы можете перепрограммировать любой атрибут по вашему выбору - 
                   но вы должны взять второй результат, даже если он ниже первого.
+                </div>
+                <div>
+                  Обратитесь к диаграмме прочности (ниже), чтобы определить «Несущий инструмент устранения неполадок»
+                  Capacity "и" HTH Damage "(HTH означает рукопашный бой) stat.
+                </div>
+                <div>
+                  Проверьте таблицу выносливости (ниже), чтобы определить, как «Мачо» ваш персонаж,
+                  и сколько «Раненных уровней» он может принять перед смертью.
                 </div>
               <template
                 v-for="j, i in jobs"
@@ -190,38 +244,8 @@
               </v-card-actions>
             </v-card>
           </v-stepper-content>
-          <v-stepper-content step="4">
+          <v-stepper-content step="3">
             <v-card class="mb-5">
-              <v-card-text>
-                <div>
-                  Обратитесь к диаграмме прочности (ниже), чтобы определить «Несущий инструмент устранения неполадок»
-                  Capacity "и" HTH Damage "(HTH означает рукопашный бой) stat.
-                </div>
-              </v-card-text>
-              <v-card-actions>
-                <v-btn color="primary" @click.native="prevStep">Назад</v-btn>
-                <v-spacer />
-                <v-btn color="primary" @click.native="nextStep">Вперед</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-stepper-content>
-          <v-stepper-content step="5">
-            <v-card class="mb-5">
-              <v-card-text>
-                <div>
-                  Проверьте таблицу выносливости (ниже), чтобы определить, как «Мачо» ваш персонаж,
-                  и сколько «Раненных уровней» он может принять перед смертью.
-                </div>
-              </v-card-text>
-              <v-card-actions>
-                <v-btn color="primary" @click.native="prevStep">Назад</v-btn>
-                <v-spacer />
-                <v-btn color="primary" @click.native="nextStep">Вперед</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-stepper-content>
-          <v-stepper-content step="6">
-            <v-card color="grey lighten-1" class="mb-5" height="200px">
               <v-card-text>
                 <div>
                   Запишите «Базы навыков» вашего персонажа в разделе «Навыки» на листе персонажа (a
@@ -235,8 +259,8 @@
               </v-card-actions>
             </v-card>
           </v-stepper-content>
-          <v-stepper-content step="7">
-            <v-card color="grey lighten-1" class="mb-5" height="200px">
+          <v-stepper-content step="4">
+            <v-card class="mb-5">
               <v-card-text>
                 <div>
                   Определите группу обслуживания вашего персонажа в таблице «Группа обслуживания» ниже.
@@ -251,8 +275,8 @@
               </v-card-actions>
             </v-card>
           </v-stepper-content>
-          <v-stepper-content step="8">
-            <v-card color="grey lighten-1" class="mb-5" height="200px">
+          <v-stepper-content step="5">
+            <v-card class="mb-5">
               <v-card-text>
                 <div>
                   Выберите оставшиеся навыки, как описано в разделе «Навык навыка» ниже.
@@ -265,8 +289,8 @@
               </v-card-actions>
             </v-card>
           </v-stepper-content>
-          <v-stepper-content step="9">
-            <v-card color="grey lighten-1" class="mb-5" height="200px">
+          <v-stepper-content step="6">
+            <v-card class="mb-5">
               <v-card-text>
                 <div>
                   Получите ваш gamemaster, чтобы помочь вам определить, есть ли у вас сила мутантов и что это.
@@ -279,8 +303,8 @@
               </v-card-actions>
             </v-card>
           </v-stepper-content>
-          <v-stepper-content step="10">
-            <v-card color="grey lighten-1" class="mb-5" height="200px">
+          <v-stepper-content step="7">
+            <v-card class="mb-5">
               <v-card-text>
                 <div>
                   Получите своего геймера, чтобы помочь вам определить, находитесь ли вы в тайном обществе и что это общество.
@@ -293,8 +317,8 @@
               </v-card-actions>
             </v-card>
           </v-stepper-content>
-          <v-stepper-content step="11">
-            <v-card color="grey lighten-1" class="mb-5" height="200px">
+          <v-stepper-content step="8">
+            <v-card class="mb-5">
               <v-card-text>
                 <div>
                   Спросите у gamemaster, какое оборудование и какие у вас есть средства устранения неполадок,

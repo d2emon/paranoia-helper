@@ -10,6 +10,8 @@ var player = {
   endurance: 1,
   moxie: 1,
   chutzpah: 1,
+  mechApt: 1,
+  power: 1,
 
   rollStats: function () {
     this.strength = Math.floor(Math.random() * 10) + 1
@@ -18,6 +20,8 @@ var player = {
     this.endurance = Math.floor(Math.random() * 10) + 1
     this.moxie = Math.floor(Math.random() * 10) + 1
     this.chutzpah = Math.floor(Math.random() * 10) + 1
+    this.mechApt = Math.floor(Math.random() * 10) + 1
+    this.power = Math.floor(Math.random() * 10) + 1
   },
   fullName: function () {
     let res = ''
@@ -28,6 +32,36 @@ var player = {
   },
   nextClone: function () {
     this.cloneNo++
+  },
+  carryingCapacity: function () {
+    if (this.strength >= 10) return 100
+    if (this.strength >= 9) return 80
+    if (this.strength >= 8) return 65
+    if (this.strength >= 7) return 50
+    if (this.strength >= 6) return 40
+    if (this.strength >= 4) return 30
+    return 25
+  },
+  HTH: function () {
+    if (this.strength >= 10) return 5
+    if (this.strength >= 8) return 4
+    if (this.strength >= 6) return 3
+    if (this.strength >= 4) return 2
+    return 1
+  },
+  macho: function () {
+    if (this.endurance >= 10) return 5
+    if (this.endurance >= 8) return 4
+    if (this.endurance >= 6) return 3
+    if (this.endurance >= 4) return 2
+    return 1
+  },
+  woundLevels: function () {
+    if (this.endurance >= 10) return 7
+    if (this.endurance >= 8) return 6
+    if (this.endurance >= 6) return 5
+    if (this.endurance >= 4) return 4
+    return 3
   }
 }
 
