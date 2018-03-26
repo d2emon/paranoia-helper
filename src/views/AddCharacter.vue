@@ -228,7 +228,7 @@
                   и сколько «Раненных уровней» он может принять перед смертью.
                 </div>
               <template
-                v-for="j, i in jobs"
+                v-for="j, i in services"
               >
                 <div :key="'job' + i">
                   <h3>{{ j.title }} <em>{{ j.short }}</em></h3>
@@ -262,6 +262,16 @@
           <v-stepper-content step="4">
             <v-card class="mb-5">
               <v-card-text>
+                <v-select
+                  label="Служба"
+                  :items="services"
+                  v-model="player.services"
+                  multiple
+                  chips
+                  item-text="title"
+                  item-value="id"
+                >
+                </v-select>
                 <div>
                   Определите группу обслуживания вашего персонажа в таблице «Группа обслуживания» ниже.
                   затем перейдут на то, какие навыки ваш персонаж узнает как часть этой группы обслуживания
@@ -342,7 +352,8 @@
 export default {
   name: 'add-character',
   computed: {
-    clearances: function () { return this.$store.state.player.securityClearances }
+    clearances: function () { return this.$store.state.player.securityClearances },
+    services: function () { return this.$store.state.player.jobs }
   },
   data: function () {
     console.log(this.$store)
@@ -350,9 +361,9 @@ export default {
     var clearances = this.$store.state.player.securityClearances
     console.log(clearances)
     return {
+      s: [],
       player: this.addClone({}),
-      step: 0,
-      jobs: this.$store.state.player.jobs
+      step: 0
     }
   },
   methods: {
