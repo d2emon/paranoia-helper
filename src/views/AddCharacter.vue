@@ -1,6 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout column align-center>
+      {{ players }}
       <v-stepper v-model="step">
         <v-stepper-header>
           <v-stepper-step step="1" :complete="step > 1">Имя</v-stepper-step>
@@ -353,6 +354,7 @@ export default {
   name: 'add-character',
   computed: {
     clearances: function () { return this.$store.state.player.securityClearances },
+    players: function () { return this.$store.state.player.players },
     services: function () { return this.$store.state.player.jobs }
   },
   data: function () {

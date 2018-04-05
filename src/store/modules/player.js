@@ -210,6 +210,7 @@ const state = {
     '3.\tThe clone violates his security clearance.',
     '4.\tThe Computer says.'
   ],
+  players: [],
   player: null,
   pos: null,
 
@@ -237,6 +238,8 @@ const getters = {
       p.services.push(p.rollService(true).id)
     }
     p.rollStats()
+
+    state.players.push(p)
     return p
   },
   messages: (state) => {

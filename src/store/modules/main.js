@@ -7,6 +7,11 @@ const state = {
       to: '/add-character'
     },
     {
+      icon: 'account_circle',
+      title: 'Персонажи',
+      to: '/characters'
+    },
+    {
       icon: 'bubble_chart',
       title: 'Навыки и их использование'
     },
